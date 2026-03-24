@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакты | Земля Искусства</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="contacts">
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">Земля Искусства</a>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+            <nav class="nav-links" id="navLinks">
+                <a href="index.html" class="nav-link">Главная</a>
+                <a href="about.html" class="nav-link">О школе</a>
+                <a href="directions.html" class="nav-link">Направления</a>
+                <a href="teachers.html" class="nav-link">Преподаватели</a>
+                <a href="courses.html" class="nav-link">Курсы</a>
+                <a href="contest.html" class="nav-link">Конкурс</a>
+                <a href="contacts.html" class="nav-link active">Контакты</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="section container">
+            <h1 class="text-center" style="margin-bottom: 3rem;">Контакты</h1>
+            <div class="grid grid-2">
+                <div class="card" style="padding: 2rem;">
+                    <h3>Как нас найти</h3>
+                    <br>
+                    <p><strong>Адрес:</strong><br><span id="contact-address">Загрузка...</span></p>
+                    <br>
+                    <p><strong>Телефон:</strong><br><a id="contact-phone-link" href="#"><span id="contact-phone">Загрузка...</span></a></p>
+                    <br>
+                    <p><strong>Email:</strong><br><a id="contact-email-link" href="#"><span id="contact-email">Загрузка...</span></a></p>
+                    <br>
+                    <p><strong>Часы работы:</strong><br><span id="contact-hours">Загрузка...</span></p>
+                    <br>
+                    <button class="btn btn-primary" onclick="openFormModal('enrollment')">Записаться на занятие</button>
+                </div>
+                <div style="background: #eee; border-radius: var(--radius-lg); min-height: 300px; display: flex; align-items: center; justify-content: center;">
+                    <p style="color: #888;">Здесь будет карта (Яндекс/Google)</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p class="text-center" style="opacity: 0.6; font-size: 0.8rem;">© 2024 Земля Искусства</p>
+        </div>
+    </footer>
+
+    <div id="formModal" class="modal">
+        <div class="modal-content">
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <script src="js/content-loader.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

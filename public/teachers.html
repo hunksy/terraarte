@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Преподаватели | Земля Искусства</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="teachers">
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">Земля Искусства</a>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+            <nav class="nav-links" id="navLinks">
+                <a href="index.html" class="nav-link">Главная</a>
+                <a href="about.html" class="nav-link">О школе</a>
+                <a href="directions.html" class="nav-link">Направления</a>
+                <a href="teachers.html" class="nav-link active">Преподаватели</a>
+                <a href="courses.html" class="nav-link">Курсы</a>
+                <a href="contest.html" class="nav-link">Конкурс</a>
+                <a href="contacts.html" class="nav-link">Контакты</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="section container">
+            <h1 class="text-center" style="margin-bottom: 3rem;">Наши преподаватели</h1>
+            <div class="grid grid-3" id="teachers-grid"></div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p class="text-center" style="opacity: 0.6; font-size: 0.8rem;">© 2024 Земля Искусства</p>
+        </div>
+    </footer>
+
+    <div id="formModal" class="modal">
+        <div class="modal-content">
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <script src="js/content-loader.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

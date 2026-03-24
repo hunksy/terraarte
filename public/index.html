@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Земля Искусства - Первая ремесленная школа в Тюмени">
+    <title>Земля Искусства | Главная</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="home">
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 19l7-7 3 3-7 7-3-3z"></path>
+                    <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path>
+                    <circle cx="11" cy="11" r="2"></circle>
+                </svg>
+                Земля Искусства
+            </a>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+            <nav class="nav-links" id="navLinks">
+                <a href="index.html" class="nav-link active">Главная</a>
+                <a href="about.html" class="nav-link">О школе</a>
+                <a href="directions.html" class="nav-link">Направления</a>
+                <a href="teachers.html" class="nav-link">Преподаватели</a>
+                <a href="courses.html" class="nav-link">Курсы</a>
+                <a href="masterclass.html" class="nav-link">Мастер-классы</a>
+                <a href="contest.html" class="nav-link">Конкурс</a>
+                <a href="documents.html" class="nav-link">Документы</a>
+                <a href="contacts.html" class="nav-link">Контакты</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://image.qwenlm.ai/public_source/5acfba9e-b7fd-4c82-9574-3e978d5814b3/123707a08-dacc-468f-80ed-1e27082763a3.png');">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 id="hero-title">Загрузка...</h1>
+                    <p id="hero-subtitle">Загрузка...</p>
+                    <div class="hero-buttons">
+                        <button class="btn btn-primary" id="hero-cta-primary" onclick="openFormModal('enrollment')">Загрузка...</button>
+                        <button class="btn btn-white" id="hero-cta-secondary" onclick="window.location.href='contest.html'">Загрузка...</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Preview -->
+        <section class="section container">
+            <div class="grid grid-2">
+                <div>
+                    <h2 style="margin-bottom: 1rem;">Почему выбирают нас</h2>
+                    <p id="about-intro" style="margin-bottom: 1.5rem; color: var(--color-text-light);">Загрузка...</p>
+                    <ul id="about-benefits" style="display: grid; gap: 10px;"></ul>
+                    <a href="about.html" class="btn btn-outline mt-lg">Подробнее о школе</a>
+                </div>
+                <div>
+                    <img src="https://image.qwenlm.ai/public_source/5acfba9e-b7fd-4c82-9574-3e978d5814b3/166485c27-d261-4c94-9e2d-13a851fb580c.png" alt="Студия" style="width:100%; height: 100%; object-fit: cover; border-radius: var(--radius-lg);">
+                </div>
+            </div>
+        </section>
+
+        <!-- Directions Preview -->
+        <section class="section" style="background: white;">
+            <div class="container">
+                <h2 class="text-center" style="margin-bottom: 2rem;">Направления обучения</h2>
+                <div class="grid grid-3" id="directions-grid"></div>
+                <div class="text-center mt-lg">
+                    <a href="directions.html" class="btn btn-outline">Все направления</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Teachers Preview -->
+        <section class="section container">
+            <h2 class="text-center" style="margin-bottom: 2rem;">Наши преподаватели</h2>
+            <div class="grid grid-3" id="teachers-preview-grid"></div>
+            <div class="text-center mt-lg">
+                <a href="teachers.html" class="btn btn-outline">Вся команда</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Земля Искусства</h4>
+                    <p style="opacity: 0.8; font-size: 0.9rem;">Первая ремесленная школа в Тюмени. Учим детей творить своими руками с любовью к материалу.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Навигация</h4>
+                    <ul class="footer-links">
+                        <li><a href="directions.html">Курсы</a></li>
+                        <li><a href="teachers.html">Команда</a></li>
+                        <li><a href="contest.html">Конкурс</a></li>
+                        <li><a href="documents.html">Документы</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Контакты</h4>
+                    <ul class="footer-links">
+                        <li>г. Тюмень, ул. Ленина, 45</li>
+                        <li><a href="tel:+73452000000">+7 (3452) 00-00-00</a></li>
+                        <li><a href="mailto:info@terraarte.ru">info@terraarte.ru</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div style="margin-top: var(--spacing-lg); padding-top: var(--spacing-md); border-top: 1px solid rgba(255,255,255,0.1); text-align: center; font-size: 0.8rem; opacity: 0.6;">
+                © 2026 Земля Искусства. Все права защищены.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Form Modal -->
+    <div id="formModal" class="modal">
+        <div class="modal-content">
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/content-loader.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

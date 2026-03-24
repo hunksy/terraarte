@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Конкурс | Земля Искусства</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="contest">
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">Земля Искусства</a>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+            <nav class="nav-links" id="navLinks">
+                <a href="index.html" class="nav-link">Главная</a>
+                <a href="about.html" class="nav-link">О школе</a>
+                <a href="directions.html" class="nav-link">Направления</a>
+                <a href="teachers.html" class="nav-link">Преподаватели</a>
+                <a href="courses.html" class="nav-link">Курсы</a>
+                <a href="contest.html" class="nav-link active">Конкурс</a>
+                <a href="contacts.html" class="nav-link">Контакты</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="section container">
+            <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+                <h1 id="contest-title" style="margin-bottom: 1.5rem;">Загрузка...</h1>
+                <p id="contest-desc" style="font-size: 1.2rem; margin-bottom: 2rem;">Загрузка...</p>
+                <div id="contest-deadline" style="background: var(--color-secondary); color: white; padding: 1rem; border-radius: var(--radius-md); display: inline-block; margin-bottom: 2rem;">Загрузка...</div>
+                
+                <div class="grid grid-2" style="text-align: left; margin-top: 3rem;">
+                    <div>
+                        <h3 style="margin-bottom: 1rem;">🏆 Призы</h3>
+                        <ul id="contest-prizes" style="display: grid; gap: 10px;"></ul>
+                    </div>
+                    <div>
+                        <h3 style="margin-bottom: 1rem;">📋 Требования</h3>
+                        <ul id="contest-requirements" style="display: grid; gap: 10px;"></ul>
+                    </div>
+                </div>
+                
+                <button class="btn btn-primary mt-lg" onclick="openFormModal('contest')">Подать заявку на конкурс</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p class="text-center" style="opacity: 0.6; font-size: 0.8rem;">© 2024 Земля Искусства</p>
+        </div>
+    </footer>
+
+    <div id="formModal" class="modal">
+        <div class="modal-content">
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <script src="js/content-loader.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
