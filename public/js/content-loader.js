@@ -188,10 +188,6 @@ const ContentLoader = {
                     <h3 class="card-title">${teacher.name}</h3>
                     <p style="color: var(--color-primary); font-weight: 600;">${teacher.role}</p>
                     <p class="card-text">${teacher.description}</p>
-                    <p style="font-size: 0.85rem; color: var(--color-text-light);">
-                        📚 ${teacher.education}<br>
-                        ⏱ ${teacher.experience} опыта
-                    </p>
                 </div>
             </div>
         `;
