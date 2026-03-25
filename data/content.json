@@ -26,39 +26,30 @@
     "directions": [
       {
         "id": "ceramics",
-        "title": "Керамика и гончарное дело",
+        "title": "Керамика",
         "description": "Работа на гончарном круге, лепка, роспись готовых изделий. От чашки до вазы.",
         "duration": "3 месяца",
         "price": "4500 ₽/мес",
         "age": "7-15 лет",
-        "image": "https://image.qwenlm.ai/public_source/5acfba9e-b7fd-4c82-9574-3e978d5814b3/166485c27-d261-4c94-9e2d-13a851fb580c.png"
+        "image": "assets/images/directions/ceramics.jpg"
       },
       {
-        "id": "painting",
-        "title": "Живопись и рисунок",
+        "id": "weaving",
+        "title": "Ткачество",
         "description": "Основы композиции, работа с акварелью, маслом и пастелью. Развитие художественного вкуса.",
         "duration": "4 месяца",
         "price": "4000 ₽/мес",
         "age": "6-14 лет",
-        "image": "https://image.qwenlm.ai/public_source/5acfba9e-b7fd-4c82-9574-3e978d5814b3/123707a08-dacc-468f-80ed-1e27082763a3.png"
+        "image": "assets/images/directions/weaving.jpg"
       },
       {
-        "id": "sculpture",
-        "title": "Скульптура и лепка",
+        "id": "toy-workshop",
+        "title": "Мастерская игрушки",
         "description": "Объемное моделирование из глины и пластилина. Развитие моторики и пространственного мышления.",
         "duration": "3 месяца",
         "price": "4200 ₽/мес",
         "age": "5-12 лет",
-        "image": "https://image.qwenlm.ai/public_source/5acfba9e-b7fd-4c82-9574-3e978d5814b3/166485c27-d261-4c94-9e2d-13a851fb580c.png"
-      },
-      {
-        "id": "crafts",
-        "title": "Творческая мастерская",
-        "description": "Смешанные техники, работа с текстилем, деревом и другими материалами.",
-        "duration": "2 месяца",
-        "price": "3800 ₽/мес",
-        "age": "6-13 лет",
-        "image": "https://image.qwenlm.ai/public_source/5acfba9e-b7fd-4c82-9574-3e978d5814b3/123707a08-dacc-468f-80ed-1e27082763a3.png"
+        "image": "assets/images/directions/toy-workshop.jpg"
       }
     ],
     "courses": [
