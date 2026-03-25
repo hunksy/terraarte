@@ -1,11 +1,39 @@
 {
-  "address": "г. Тюмень, ул. Ленина, 45, офис 202",
-  "phone": "+7 (3452) 00-00-00",
-  "email": "info@terraarte.ru",
-  "hours": "Пн-Пт: 10:00 - 20:00, Сб-Вс: 11:00 - 18:00",
-  "social": {
-    "vk": "https://vk.com/terraarte",
-    "telegram": "https://t.me/terraarte",
-    "instagram": "https://instagram.com/terraarte"
+  "address": "Тюмень, ул. Щербакова, 88а",
+  "phones": [
+    {
+      "number": "8 (912) 079-65-08"
+    },
+    {
+      "number": "8 (950) 492-58-48"
+    }
+  ],
+  "hours": "Ежедневно, 09:00-18:00",
+  "social": [
+    {
+      "url": "https://vk.com/terra_creative",
+      "icon": "assets/images/socials/vk.svg"
+    },
+    {
+      "url": "https://t.me/SWCeramica",
+      "icon": "assets/images/socials/telegram.svg"
+    },
+    {
+      "url": "https://instagram.com/swceramica72",
+      "icon": "assets/images/socials/instagram.svg"
+    },
+    { 
+      "url": "https://www.wa.me/79120796508",
+      "icon": "assets/images/socials/whatsapp.svg"
+    }
+  ],
+  "footer": {
+    "description": "Первая ремесленная школа в Тюмени. Учим детей творить своими руками с любовью к материалу.",
+    "navigation": [
+      { "label": "Направления", "url": "directions.html" },
+      { "label": "Преподаватели", "url": "teachers.html" },
+      { "label": "Конкурс", "url": "contest.html" },
+      { "label": "Документы", "url": "documents.html" }
+    ]
   }
 }

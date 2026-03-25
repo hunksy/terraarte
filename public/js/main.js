@@ -125,7 +125,7 @@ async function openFormModal(formType, prefillDirection = '') {
                     Отправить заявку
                 </button>
                 <p class="form-note">
-                    📋 Нажимая кнопку, вы соглашаетесь с <a href="documents.html" target="_blank" style="text-decoration: underline;">обработкой персональных данных</a>.
+                    Нажимая кнопку, вы соглашаетесь с <a href="documents.html" target="_blank" style="text-decoration: underline;">обработкой персональных данных</a>.
                 </p>
             </form>
         `;
@@ -246,7 +246,6 @@ async function handleFormSubmit(event, formType) {
             const modalBody = document.getElementById('modalBody');
             modalBody.innerHTML = `
                 <div style="text-align: center; padding: 2rem;">
-                    <div style="font-size: 4rem; margin-bottom: 1rem;">✅</div>
                     <h3 style="margin-bottom: 1rem; color: var(--color-primary);">${result.message}</h3>
                     <p style="color: var(--color-text-light); margin-bottom: 1.5rem;">
                         Мы свяжемся с вами в ближайшее время.
@@ -263,7 +262,7 @@ async function handleFormSubmit(event, formType) {
         }
     } catch (error) {
         console.error('Form submission error:', error);
-        alert('❌ Произошла ошибка при отправке. Попробуйте позже или позвоните нам.');
+        alert('Произошла ошибка при отправке. Попробуйте позже или позвоните нам.');
         submitBtn.textContent = originalText;
         submitBtn.disabled = false;
     }

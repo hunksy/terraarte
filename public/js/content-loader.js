@@ -44,8 +44,14 @@ const ContentLoader = {
                 const dirRes = await fetch('/api/directions');
                 this.data.directions = await dirRes.json().catch(() => null);
             }
+
+            if (!this.data.contacts) {
+                const contactsRes = await fetch('/api/contacts');
+                this.data.contacts = await contactsRes.json().catch(() => null);
+            }
             
             this.populatePage(pageId);
+            this.populateFooter(); 
         } catch (error) {
             console.error('Error initializing ContentLoader:', error);
         }
@@ -139,6 +145,7 @@ const ContentLoader = {
         if (!about) return;
         
         document.getElementById('about-title').textContent = about.title;
+        document.getElementById('about-intro').textContent = about.intro;
         document.getElementById('about-text').textContent = about.fullText;
         document.getElementById('about-benefits-full').innerHTML = about.benefits
             .map(b => `<li>✓ ${b}</li>`).join('');
@@ -213,12 +220,69 @@ const ContentLoader = {
         const { contacts } = this.data;
         if (!contacts) return;
         
+        // Address
         document.getElementById('contact-address').textContent = contacts.address;
-        document.getElementById('contact-phone').textContent = contacts.phone;
-        document.getElementById('contact-phone-link').href = `tel:${contacts.phone}`;
-        document.getElementById('contact-email').textContent = contacts.email;
-        document.getElementById('contact-email-link').href = `mailto:${contacts.email}`;
+        
+        // Hours
         document.getElementById('contact-hours').textContent = contacts.hours;
+        
+        // Phones (multiple)
+        const phonesContainer = document.getElementById('contact-phones');
+        if (contacts.phones && Array.isArray(contacts.phones)) {
+            phonesContainer.innerHTML = contacts.phones
+                .map(phone => `
+                    <a href="tel:${phone.number.replace(/\s/g, '')}" class="phone-link">
+                        ${phone.number}
+                    </a>
+                `).join('');
+        }
+        
+        // Social Links with icons
+        const socialContainer = document.getElementById('social-links');
+        if (contacts.social && Array.isArray(contacts.social)) {
+            socialContainer.innerHTML = contacts.social
+                .map(social => `
+                    <a href="${social.url}" target="_blank" rel="noopener" class="btn btn-outline btn-sm">
+                        <img src="${social.icon}" alt="${social.name}" class="social-icon" width="20" height="20" loading="lazy">
+                    </a>
+                `).join('');
+        }
+    },
+
+    populateFooter() {
+        const { contacts } = this.data;
+        if (!contacts || !contacts.footer) return;
+        
+        // Footer description
+        const footerDesc = document.getElementById('footer-description');
+        if (footerDesc) {
+            footerDesc.textContent = contacts.footer.description;
+        }
+        
+        // Footer navigation
+        const footerNav = document.getElementById('footer-navigation');
+        if (footerNav && contacts.footer.navigation) {
+            footerNav.innerHTML = contacts.footer.navigation
+                .map(link => `<li><a href="${link.url}">${link.label}</a></li>`)
+                .join('');
+        }
+        
+        // Footer address
+        const footerAddress = document.getElementById('footer-address');
+        if (footerAddress) {
+            footerAddress.textContent = contacts.address;
+        }
+        
+        // Footer phone (first number)
+        const footerPhones = document.getElementById('footer-phones');
+        if (contacts.phones && Array.isArray(contacts.phones)) {
+            footerPhones.innerHTML = contacts.phones
+                .map(phone => `
+                    <a href="tel:${phone.number.replace(/\s/g, '')}" class="phone-link">
+                        ${phone.number}
+                    </a>
+                `).join('');
+        }
     },
 
     createDirectionCard(dir, full = false) {
