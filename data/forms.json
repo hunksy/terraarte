@@ -1,0 +1,24 @@
+{
+  "enrollment": {
+    "title": "Заявка на обучение",
+    "fields": [
+      { "name": "parentName", "label": "Имя родителя", "type": "text", "required": true },
+      { "name": "phone", "label": "Телефон", "type": "tel", "required": true },
+      { "name": "childName", "label": "Имя ребёнка", "type": "text", "required": true },
+      { "name": "childAge", "label": "Возраст ребёнка", "type": "number", "required": true },
+      { "name": "direction", "label": "Направление", "type": "select", "required": true },
+      { "name": "comment", "label": "Комментарий", "type": "textarea", "required": false }
+    ]
+  },
+  "contest": {
+    "title": "Заявка на конкурс",
+    "fields": [
+      { "name": "fullName", "label": "ФИО", "type": "text", "required": true },
+      { "name": "phone", "label": "Телефон", "type": "tel", "required": true },
+      { "name": "email", "label": "Email", "type": "email", "required": true },
+      { "name": "age", "label": "Возраст", "type": "number", "required": true },
+      { "name": "workTitle", "label": "Название работы", "type": "text", "required": true },
+      { "name": "comment", "label": "Комментарий", "type": "textarea", "required": false }
+    ]
+  }
+}

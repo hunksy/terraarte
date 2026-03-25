@@ -3,66 +3,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="О школе Земля Искусства">
+    <meta name="description" content="О школе Земля Искусства - Первая ремесленная школа в Тюмени">
     <title>О школе | Земля Искусства</title>
     
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
     
+    <!-- Styles -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body data-page="about">
-    <header>
+    <!-- Header -->
+    <header id="mainHeader">
         <div class="container nav-container">
-            <a href="index.html" class="logo">Земля Искусства</a>
-            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+            <a href="index.html" class="logo">
+                <img 
+                    src="assets/images/logo/logo.png" 
+                    alt="Земля Искусства"
+                    class="logo-img"
+                    width="64"
+                    height="40"
+                    loading="eager"
+                >
+                Земля Искусства
+            </a>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Открыть меню">☰</button>
             <nav class="nav-links" id="navLinks">
                 <a href="index.html" class="nav-link">Главная</a>
                 <a href="about.html" class="nav-link active">О школе</a>
                 <a href="directions.html" class="nav-link">Направления</a>
                 <a href="teachers.html" class="nav-link">Преподаватели</a>
                 <a href="courses.html" class="nav-link">Курсы</a>
+                <a href="masterclass.html" class="nav-link">Мастер-классы</a>
                 <a href="contest.html" class="nav-link">Конкурс</a>
+                <a href="documents.html" class="nav-link">Документы</a>
                 <a href="contacts.html" class="nav-link">Контакты</a>
             </nav>
         </div>
     </header>
 
     <main>
+        <!-- Page Header -->
+        <section class="section" style="background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%); color: white; padding: var(--spacing-xxl) 0;">
+            <div class="container text-center">
+                <h1 id="about-title" style="color: white; margin-bottom: 1rem;">Загрузка...</h1>
+                <p id="about-intro" style="opacity: 0.95; max-width: 700px; margin: 0 auto;">Загрузка...</p>
+            </div>
+        </section>
+
+        <!-- About Content -->
         <section class="section container">
-            <h1 id="about-title" style="margin-bottom: 2rem;">Загрузка...</h1>
             <div class="grid grid-2">
                 <div style="font-size: 1.1rem; line-height: 1.8;">
-                    <p id="about-text" style="margin-bottom: 1.5rem;">Загрузка...</p>
+                    <h2 style="margin-bottom: 1.5rem;">О нашей школе</h2>
+                    <p id="about-text" style="margin-bottom: 1.5rem; color: var(--color-text-light);">Загрузка...</p>
+                    
                     <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Наши преимущества</h3>
-                    <ul id="about-benefits-full" style="display: grid; gap: 10px;"></ul>
-                    <br>
-                    <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Лицензия и документы</h3>
-                    <p style="margin-bottom: 1rem; font-size: 0.9rem; color: #666;">
-                        Школа работает официально. Лицензия на образовательную деятельность №12345 от 01.01.2023.
-                    </p>
-                    <a href="documents.html" class="btn btn-outline">Посмотреть документы</a>
+                    <ul id="about-benefits-full" style="display: grid; gap: 10px; margin-bottom: 2rem;">
+                        <!-- Benefits will be loaded from JSON -->
+                    </ul>
+                    
+                    <div style="background: var(--color-bg); padding: var(--spacing-lg); border-radius: var(--radius-lg); margin-top: 2rem;">
+                        <h4 style="margin-bottom: 1rem;">📋 Лицензия и документы</h4>
+                        <p style="margin-bottom: 1rem; font-size: 0.95rem; color: var(--color-text-light);">
+                            Школа работает официально на основании лицензии на образовательную деятельность.
+                            Все документы доступны для ознакомления.
+                        </p>
+                        <a href="documents.html" class="btn btn-outline">Посмотреть документы</a>
+                    </div>
                 </div>
                 <div>
-                    <img src="https://image.qwenlm.ai/public_source/5acfba9e-b7fd-4c82-9574-3e978d5814b3/123707a08-dacc-468f-80ed-1e27082763a3.png" style="border-radius: var(--radius-lg);">
+                    <img 
+                        src="assets/images/gallery/2.JPG" 
+                        alt="Учебный класс школы Земля Искусства"
+                        style="width:100%; height: 100%; object-fit: cover; border-radius: var(--radius-lg);"
+                        loading="lazy"
+                    >
                 </div>
             </div>
         </section>
+
+        <!-- Stats Section -->
+        <section class="section" style="background: white;">
+            <div class="container">
+                <div class="grid grid-4 text-center">
+                    <div>
+                        <div style="font-size: 3rem; font-weight: 700; color: var(--color-primary);">5+</div>
+                        <div style="color: var(--color-text-light);">лет опыта</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 3rem; font-weight: 700; color: var(--color-primary);">500+</div>
+                        <div style="color: var(--color-text-light);">учеников</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 3rem; font-weight: 700; color: var(--color-primary);">8</div>
+                        <div style="color: var(--color-text-light);">человек в группе</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 3rem; font-weight: 700; color: var(--color-primary);">4</div>
+                        <div style="color: var(--color-text-light);">направления</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="section container text-center">
+            <h2 style="margin-bottom: 1rem;">Готовы начать творческий путь?</h2>
+            <p style="margin-bottom: 2rem; color: var(--color-text-light); max-width: 600px; margin-left: auto; margin-right: auto;">
+                Запишитесь на пробное занятие и познакомьтесь с нашей школой лично.
+            </p>
+            <button class="btn btn-primary btn-lg" onclick="openFormModal('enrollment')">
+                Записаться на занятие
+            </button>
+        </section>
     </main>
 
+    <!-- Footer -->
     <footer>
         <div class="container">
-            <p class="text-center" style="opacity: 0.6; font-size: 0.8rem;">© 2024 Земля Искусства</p>
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Земля Искусства</h4>
+                    <p style="opacity: 0.8; font-size: 0.9rem;">Первая ремесленная школа в Тюмени. Учим детей творить своими руками с любовью к материалу.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Навигация</h4>
+                    <ul class="footer-links">
+                        <li><a href="directions.html">Курсы</a></li>
+                        <li><a href="teachers.html">Команда</a></li>
+                        <li><a href="contest.html">Конкурс</a></li>
+                        <li><a href="documents.html">Документы</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Контакты</h4>
+                    <ul class="footer-links">
+                        <li>г. Тюмень, ул. Ленина, 45</li>
+                        <li><a href="tel:+73452000000">+7 (3452) 00-00-00</a></li>
+                        <li><a href="mailto:info@terraarte.ru">info@terraarte.ru</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                © 2026 Земля Искусства. Все права защищены.
+            </div>
         </div>
     </footer>
 
-    <div id="formModal" class="modal">
+    <!-- Form Modal -->
+    <div id="formModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
         <div class="modal-content">
             <div id="modalBody"></div>
         </div>
     </div>
 
+    <!-- Scripts -->
     <script src="js/content-loader.js"></script>
     <script src="js/main.js"></script>
 </body>

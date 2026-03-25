@@ -16,17 +16,20 @@
 </head>
 <body data-page="home">
     <!-- Header -->
-    <header>
+    <header id="mainHeader">
         <div class="container nav-container">
             <a href="index.html" class="logo">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M12 19l7-7 3 3-7 7-3-3z"></path>
-                    <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path>
-                    <circle cx="11" cy="11" r="2"></circle>
-                </svg>
+                <img 
+                    src="assets/images/logo/logo.png" 
+                    alt="Земля Искусства"
+                    class="logo-img"
+                    width="64"
+                    height="40"
+                    loading="eager"
+                >
                 Земля Искусства
             </a>
-            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Открыть меню">☰</button>
             <nav class="nav-links" id="navLinks">
                 <a href="index.html" class="nav-link active">Главная</a>
                 <a href="about.html" class="nav-link">О школе</a>
@@ -43,7 +46,7 @@
 
     <main>
         <!-- Hero Section -->
-        <section class="hero" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://image.qwenlm.ai/public_source/5acfba9e-b7fd-4c82-9574-3e978d5814b3/123707a08-dacc-468f-80ed-1e27082763a3.png');">
+        <section class="hero" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('assets/images/gallery/1.JPG');">
             <div class="container">
                 <div class="hero-content">
                     <h1 id="hero-title">Загрузка...</h1>
@@ -66,7 +69,7 @@
                     <a href="about.html" class="btn btn-outline mt-lg">Подробнее о школе</a>
                 </div>
                 <div>
-                    <img src="https://image.qwenlm.ai/public_source/5acfba9e-b7fd-4c82-9574-3e978d5814b3/166485c27-d261-4c94-9e2d-13a851fb580c.png" alt="Студия" style="width:100%; height: 100%; object-fit: cover; border-radius: var(--radius-lg);">
+                    <img src="assets/images/gallery/2.JPG" alt="Студия" style="width:100%; height: 100%; object-fit: cover; border-radius: var(--radius-lg);" loading="lazy">
                 </div>
             </div>
         </section>
@@ -88,6 +91,17 @@
             <div class="grid grid-3" id="teachers-preview-grid"></div>
             <div class="text-center mt-lg">
                 <a href="teachers.html" class="btn btn-outline">Вся команда</a>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq-section">
+            <div class="container faq-container">
+                <h2 class="faq-title">Часто задаваемые вопросы</h2>
+                <p class="faq-subtitle">Найдёте ответы на самые популярные вопросы о нашей школе</p>
+                <div class="faq-list" id="faqList">
+                    <!-- FAQ items will be loaded from JSON -->
+                </div>
             </div>
         </section>
     </main>
@@ -118,14 +132,14 @@
                     </ul>
                 </div>
             </div>
-            <div style="margin-top: var(--spacing-lg); padding-top: var(--spacing-md); border-top: 1px solid rgba(255,255,255,0.1); text-align: center; font-size: 0.8rem; opacity: 0.6;">
+            <div class="footer-bottom">
                 © 2026 Земля Искусства. Все права защищены.
             </div>
         </div>
     </footer>
 
     <!-- Form Modal -->
-    <div id="formModal" class="modal">
+    <div id="formModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
         <div class="modal-content">
             <div id="modalBody"></div>
         </div>
@@ -133,6 +147,7 @@
 
     <!-- Scripts -->
     <script src="js/content-loader.js"></script>
+    <script src="js/faq-loader.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>

@@ -1,31 +1,74 @@
 /**
  * Content Loader Module
- * Loads content from JSON files and populates the page
+ * Loads content from separate JSON files and populates the page
  */
 
 const ContentLoader = {
-    content: null,
-    teachers: null,
-
+    data: {},
+    
+    // Загрузка всех необходимых данных параллельно
     async init() {
         try {
-            const [contentRes, teachersRes] = await Promise.all([
-                fetch('/api/content'),
-                fetch('/api/teachers')
-            ]);
+            // Определяем, какие данные нужны для текущей страницы
+            const pageId = document.body.dataset.page;
+            const endpoints = this.getEndpointsForPage(pageId);
             
-            this.content = await contentRes.json();
-            this.teachers = await teachersRes.json();
+            // Загружаем данные параллельно
+            const promises = endpoints.map(endpoint => 
+                fetch(`/api/${endpoint}`)
+                    .then(res => {
+                        if (!res.ok) throw new Error(`Failed to load ${endpoint}`);
+                        return res.json();
+                    })
+                    .catch(err => {
+                        console.error(`Error loading ${endpoint}:`, err);
+                        return null;
+                    })
+            );
             
-            this.populatePage();
+            const results = await Promise.all(promises);
+            
+            // Сохраняем данные в объект
+            endpoints.forEach((endpoint, i) => {
+                this.data[endpoint] = results[i];
+            });
+            
+            // Дополнительно загружаем формы для модальных окон (всегда нужны)
+            if (!this.data.forms) {
+                const formsRes = await fetch('/api/forms');
+                this.data.forms = await formsRes.json().catch(() => null);
+            }
+            
+            // Дополнительно загружаем направления для селектов в формах
+            if (!this.data.directions) {
+                const dirRes = await fetch('/api/directions');
+                this.data.directions = await dirRes.json().catch(() => null);
+            }
+            
+            this.populatePage(pageId);
         } catch (error) {
-            console.error('Error loading content:', error);
+            console.error('Error initializing ContentLoader:', error);
         }
     },
-
-    populatePage() {
-        const pageId = document.body.dataset.page;
+    
+    // Определяем, какие эндпоинты нужны для каждой страницы
+    getEndpointsForPage(pageId) {
+        const pageEndpoints = {
+            'home': ['hero', 'about', 'directions', 'teachers'],
+            'about': ['about'],
+            'directions': ['directions'],
+            'teachers': ['teachers'],
+            'courses': ['courses', 'directions'],
+            'masterclass': ['masterclasses'],
+            'contest': ['contest'],
+            'documents': ['documents'],
+            'contacts': ['contacts']
+        };
         
+        return pageEndpoints[pageId] || [];
+    },
+
+    populatePage(pageId) {
         if (!pageId) return;
 
         switch(pageId) {
@@ -60,80 +103,99 @@ const ContentLoader = {
     },
 
     populateHome() {
-        const d = this.content;
+        const { hero, about, directions, teachers } = this.data;
         
         // Hero
-        document.getElementById('hero-title').textContent = d.hero.title;
-        document.getElementById('hero-subtitle').textContent = d.hero.subtitle;
-        document.getElementById('hero-cta-primary').textContent = d.hero.ctaPrimary;
-        document.getElementById('hero-cta-secondary').textContent = d.hero.ctaSecondary;
+        if (hero) {
+            document.getElementById('hero-title').textContent = hero.title;
+            document.getElementById('hero-subtitle').textContent = hero.subtitle;
+            document.getElementById('hero-cta-primary').textContent = hero.ctaPrimary;
+            document.getElementById('hero-cta-secondary').textContent = hero.ctaSecondary;
+        }
         
         // About preview
-        document.getElementById('about-intro').textContent = d.about.intro;
-        document.getElementById('about-benefits').innerHTML = d.about.benefits
-            .map(b => `<li>✓ ${b}</li>`).join('');
+        if (about) {
+            document.getElementById('about-intro').textContent = about.intro;
+            document.getElementById('about-benefits').innerHTML = about.benefits
+                .slice(0, 4)
+                .map(b => `<li>✓ ${b}</li>`).join('');
+        }
         
         // Directions preview
-        document.getElementById('directions-grid').innerHTML = d.directions.slice(0, 3)
-            .map(dir => this.createDirectionCard(dir)).join('');
+        if (directions) {
+            document.getElementById('directions-grid').innerHTML = directions.slice(0, 3)
+                .map(dir => this.createDirectionCard(dir)).join('');
+        }
 
-        document.getElementById('teachers-preview-grid').innerHTML = this.teachers.slice(0, 3)
-            .map(t => this.createTeacherCard(t)).join('');
+        // Teachers preview
+        if (teachers) {
+            document.getElementById('teachers-preview-grid').innerHTML = teachers.slice(0, 3)
+                .map(t => this.createTeacherCard(t)).join('');
+        }
     },
 
     populateAbout() {
-        const d = this.content;
+        const { about } = this.data;
+        if (!about) return;
         
-        document.getElementById('about-title').textContent = d.about.title;
-        document.getElementById('about-text').textContent = d.about.fullText;
-        document.getElementById('about-benefits-full').innerHTML = d.about.benefits
+        document.getElementById('about-title').textContent = about.title;
+        document.getElementById('about-text').textContent = about.fullText;
+        document.getElementById('about-benefits-full').innerHTML = about.benefits
             .map(b => `<li>✓ ${b}</li>`).join('');
     },
 
     populateDirections() {
-        const d = this.content;
+        const { directions } = this.data;
+        if (!directions) return;
         
-        document.getElementById('directions-full-grid').innerHTML = d.directions
+        document.getElementById('directions-full-grid').innerHTML = directions
             .map(dir => this.createDirectionCard(dir, true)).join('');
     },
 
     populateTeachers() {
-        document.getElementById('teachers-grid').innerHTML = this.teachers
+        const { teachers } = this.data;
+        if (!teachers) return;
+        
+        document.getElementById('teachers-grid').innerHTML = teachers
             .map(t => this.createTeacherCard(t)).join('');
     },
 
     populateCourses() {
-        const d = this.content;
+        const { courses } = this.data;
+        if (!courses) return;
         
-        document.getElementById('courses-grid').innerHTML = d.courses
+        document.getElementById('courses-grid').innerHTML = courses
             .map(course => this.createCourseCard(course)).join('');
     },
 
     populateMasterclass() {
-        const d = this.content;
+        const { masterclasses } = this.data;
+        if (!masterclasses) return;
         
-        document.getElementById('masterclass-grid').innerHTML = d.masterclasses
+        document.getElementById('masterclass-grid').innerHTML = masterclasses
             .map(mc => this.createMasterclassCard(mc)).join('');
     },
 
     populateContest() {
-        const d = this.content;
+        const { contest } = this.data;
+        if (!contest) return;
         
-        document.getElementById('contest-title').textContent = d.contest.title;
-        document.getElementById('contest-desc').textContent = d.contest.description;
-        document.getElementById('contest-deadline').textContent = `⏳ Прием работ до ${d.contest.deadline}`;
-        document.getElementById('contest-prizes').innerHTML = d.contest.prizes
+        document.getElementById('contest-title').textContent = contest.title;
+        document.getElementById('contest-desc').textContent = contest.description;
+        document.getElementById('contest-deadline').textContent = `⏳ Прием работ до ${contest.deadline}`;
+        document.getElementById('contest-prizes').innerHTML = contest.prizes
             .map(p => `<li>🏆 ${p}</li>`).join('');
-        document.getElementById('contest-requirements').innerHTML = d.contest.requirements
+        document.getElementById('contest-requirements').innerHTML = contest.requirements
             .map(r => `<li>• ${r}</li>`).join('');
     },
 
     populateDocuments() {
-        const d = this.content;
+        const { documents } = this.data;
+        if (!documents) return;
         
-        document.getElementById('documents-title').textContent = d.documents.title;
-        document.getElementById('documents-desc').textContent = d.documents.description;
-        document.getElementById('documents-list').innerHTML = d.documents.files
+        document.getElementById('documents-title').textContent = documents.title;
+        document.getElementById('documents-desc').textContent = documents.description;
+        document.getElementById('documents-list').innerHTML = documents.files
             .map(file => `
                 <div class="doc-item">
                     <div class="doc-info">
@@ -148,20 +210,21 @@ const ContentLoader = {
     },
 
     populateContacts() {
-        const d = this.content.contacts;
+        const { contacts } = this.data;
+        if (!contacts) return;
         
-        document.getElementById('contact-address').textContent = d.address;
-        document.getElementById('contact-phone').textContent = d.phone;
-        document.getElementById('contact-phone-link').href = `tel:${d.phone}`;
-        document.getElementById('contact-email').textContent = d.email;
-        document.getElementById('contact-email-link').href = `mailto:${d.email}`;
-        document.getElementById('contact-hours').textContent = d.hours;
+        document.getElementById('contact-address').textContent = contacts.address;
+        document.getElementById('contact-phone').textContent = contacts.phone;
+        document.getElementById('contact-phone-link').href = `tel:${contacts.phone}`;
+        document.getElementById('contact-email').textContent = contacts.email;
+        document.getElementById('contact-email-link').href = `mailto:${contacts.email}`;
+        document.getElementById('contact-hours').textContent = contacts.hours;
     },
 
     createDirectionCard(dir, full = false) {
         return `
             <div class="card">
-                <img src="${dir.image}" class="card-img" alt="${dir.title}">
+                <img src="${dir.image}" class="card-img" alt="${dir.title}" loading="lazy">
                 <div class="card-body">
                     <h3 class="card-title">${dir.title}</h3>
                     <p class="card-text">${dir.description}</p>
@@ -183,15 +246,11 @@ const ContentLoader = {
     createTeacherCard(teacher) {
         return `
             <div class="card teacher-card">
-                <img src="${teacher.image}" class="teacher-img" alt="${teacher.name}">
+                <img src="${teacher.image}" class="teacher-img" alt="${teacher.name}" loading="lazy">
                 <div class="card-body">
                     <h3 class="card-title">${teacher.name}</h3>
                     <p style="color: var(--color-primary); font-weight: 600;">${teacher.role}</p>
                     <p class="card-text">${teacher.description}</p>
-                    <p style="font-size: 0.85rem; color: var(--color-text-light);">
-                        📚 ${teacher.education}<br>
-                        ⏱ ${teacher.experience} опыта
-                    </p>
                 </div>
             </div>
         `;

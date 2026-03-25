@@ -3,50 +3,182 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Курсы школы Земля Искусства - керамика, живопись, скульптура и другие направления">
     <title>Курсы | Земля Искусства</title>
     
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
     
+    <!-- Styles -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body data-page="courses">
-    <header>
+    <!-- Header -->
+    <header id="mainHeader">
         <div class="container nav-container">
-            <a href="index.html" class="logo">Земля Искусства</a>
-            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+            <a href="index.html" class="logo">
+                <img 
+                    src="assets/images/logo/logo.png" 
+                    alt="Земля Искусства"
+                    class="logo-img"
+                    width="64"
+                    height="40"
+                    loading="eager"
+                >
+                Земля Искусства
+            </a>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Открыть меню">☰</button>
             <nav class="nav-links" id="navLinks">
                 <a href="index.html" class="nav-link">Главная</a>
                 <a href="about.html" class="nav-link">О школе</a>
                 <a href="directions.html" class="nav-link">Направления</a>
                 <a href="teachers.html" class="nav-link">Преподаватели</a>
                 <a href="courses.html" class="nav-link active">Курсы</a>
+                <a href="masterclass.html" class="nav-link">Мастер-классы</a>
                 <a href="contest.html" class="nav-link">Конкурс</a>
+                <a href="documents.html" class="nav-link">Документы</a>
                 <a href="contacts.html" class="nav-link">Контакты</a>
             </nav>
         </div>
     </header>
 
     <main>
+        <!-- Page Header -->
+        <section class="section" style="background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%); color: white; padding: var(--spacing-xxl) 0;">
+            <div class="container text-center">
+                <h1 style="color: white; margin-bottom: 1rem;">Наши курсы</h1>
+                <p style="opacity: 0.95; max-width: 700px; margin: 0 auto; font-size: 1.1rem;">
+                    Выберите подходящую программу обучения и начните свой творческий путь уже сегодня.
+                </p>
+            </div>
+        </section>
+
+        <!-- Courses Grid -->
         <section class="section container">
-            <h1 class="text-center" style="margin-bottom: 3rem;">Наши курсы</h1>
-            <div class="grid grid-2" id="courses-grid"></div>
+            <div class="grid grid-2" id="courses-grid">
+                <!-- Courses will be loaded from JSON -->
+                <div style="text-align: center; padding: 3rem; grid-column: 1 / -1;">
+                    <div style="width: 40px; height: 40px; border: 4px solid var(--color-primary); border-top-color: transparent; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 1rem;"></div>
+                    <p style="color: var(--color-text-light);">Загрузка курсов...</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="section" style="background: white;">
+            <div class="container text-center">
+                <h2 style="margin-bottom: 1rem;">Не нашли подходящий курс?</h2>
+                <p style="margin-bottom: 2rem; color: var(--color-text-light); max-width: 600px; margin-left: auto; margin-right: auto;">
+                    Свяжитесь с нами — мы поможем подобрать индивидуальную программу обучения.
+                </p>
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <button class="btn btn-primary" onclick="openFormModal('enrollment')">
+                        Записаться на консультацию
+                    </button>
+                    <a href="contacts.html" class="btn btn-outline">
+                        Связаться с нами
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq-section">
+            <div class="container faq-container">
+                <h2 class="faq-title">Вопросы о курсах</h2>
+                <p class="faq-subtitle">Часто задаваемые вопросы об обучении</p>
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+                            <span>Можно ли записаться на курс в любое время?</span>
+                            <svg class="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Да, мы принимаем учеников в течение всего года. Вы можете присоединиться к группе в любой момент, программа адаптируется под ваш уровень.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+                            <span>Что входит в стоимость курса?</span>
+                            <svg class="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>В стоимость включены все необходимые материалы, инструменты, обжиг изделий (для керамики) и методические пособия. Дополнительно ничего покупать не нужно.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+                            <span>Можно ли оплатить курс частями?</span>
+                            <svg class="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Да, мы предлагаем рассрочку платежа. Вы можете оплатить курс помесячно или разделить сумму на 2-3 части без процентов.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+                            <span>Выдаётся ли сертификат после окончания?</span>
+                            <svg class="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Да, после успешного завершения курса все ученики получают именной сертификат о прохождении программы с указанием количества часов.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
 
+    <!-- Footer -->
     <footer>
         <div class="container">
-            <p class="text-center" style="opacity: 0.6; font-size: 0.8rem;">© 2024 Земля Искусства</p>
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Земля Искусства</h4>
+                    <p style="opacity: 0.8; font-size: 0.9rem;">Первая ремесленная школа в Тюмени. Учим детей творить своими руками с любовью к материалу.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Навигация</h4>
+                    <ul class="footer-links">
+                        <li><a href="directions.html">Курсы</a></li>
+                        <li><a href="teachers.html">Команда</a></li>
+                        <li><a href="contest.html">Конкурс</a></li>
+                        <li><a href="documents.html">Документы</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Контакты</h4>
+                    <ul class="footer-links">
+                        <li>г. Тюмень, ул. Ленина, 45</li>
+                        <li><a href="tel:+73452000000">+7 (3452) 00-00-00</a></li>
+                        <li><a href="mailto:info@terraarte.ru">info@terraarte.ru</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                © 2026 Земля Искусства. Все права защищены.
+            </div>
         </div>
     </footer>
 
-    <div id="formModal" class="modal">
+    <!-- Form Modal -->
+    <div id="formModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
         <div class="modal-content">
             <div id="modalBody"></div>
         </div>
     </div>
 
+    <!-- Scripts -->
     <script src="js/content-loader.js"></script>
     <script src="js/main.js"></script>
 </body>

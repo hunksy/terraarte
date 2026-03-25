@@ -3,67 +3,264 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ежегодный конкурс Земля Искусства - пригласием юных художников принять участие">
     <title>Конкурс | Земля Искусства</title>
     
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
     
+    <!-- Styles -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body data-page="contest">
-    <header>
+    <!-- Header -->
+    <header id="mainHeader">
         <div class="container nav-container">
-            <a href="index.html" class="logo">Земля Искусства</a>
-            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+            <a href="index.html" class="logo">
+                <img 
+                    src="assets/images/logo/logo.png" 
+                    alt="Земля Искусства"
+                    class="logo-img"
+                    width="64"
+                    height="40"
+                    loading="eager"
+                >
+                Земля Искусства
+            </a>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Открыть меню">☰</button>
             <nav class="nav-links" id="navLinks">
                 <a href="index.html" class="nav-link">Главная</a>
                 <a href="about.html" class="nav-link">О школе</a>
                 <a href="directions.html" class="nav-link">Направления</a>
                 <a href="teachers.html" class="nav-link">Преподаватели</a>
                 <a href="courses.html" class="nav-link">Курсы</a>
+                <a href="masterclass.html" class="nav-link">Мастер-классы</a>
                 <a href="contest.html" class="nav-link active">Конкурс</a>
+                <a href="documents.html" class="nav-link">Документы</a>
                 <a href="contacts.html" class="nav-link">Контакты</a>
             </nav>
         </div>
     </header>
 
     <main>
+        <!-- Page Header -->
+        <section class="section" style="background: linear-gradient(135deg, var(--color-secondary) 0%, #7A8F82 100%); color: white; padding: var(--spacing-xxl) 0;">
+            <div class="container text-center">
+                <div style="font-size: 4rem; margin-bottom: 1rem;">🏆</div>
+                <h1 id="contest-title" style="color: white; margin-bottom: 1rem;">Загрузка...</h1>
+                <p id="contest-desc" style="opacity: 0.95; max-width: 700px; margin: 0 auto; font-size: 1.1rem;">Загрузка...</p>
+            </div>
+        </section>
+
+        <!-- Contest Details -->
         <section class="section container">
-            <div style="max-width: 800px; margin: 0 auto; text-align: center;">
-                <h1 id="contest-title" style="margin-bottom: 1.5rem;">Загрузка...</h1>
-                <p id="contest-desc" style="font-size: 1.2rem; margin-bottom: 2rem;">Загрузка...</p>
-                <div id="contest-deadline" style="background: var(--color-secondary); color: white; padding: 1rem; border-radius: var(--radius-md); display: inline-block; margin-bottom: 2rem;">Загрузка...</div>
+            <div style="max-width: 900px; margin: 0 auto;">
+                <!-- Deadline Banner -->
+                <div id="contest-deadline" style="background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%); color: white; padding: var(--spacing-lg); border-radius: var(--radius-lg); text-align: center; margin-bottom: var(--spacing-xl); font-size: 1.2rem; font-weight: 600;">
+                    ⏳ Загрузка...
+                </div>
                 
-                <div class="grid grid-2" style="text-align: left; margin-top: 3rem;">
-                    <div>
-                        <h3 style="margin-bottom: 1rem;">🏆 Призы</h3>
-                        <ul id="contest-prizes" style="display: grid; gap: 10px;"></ul>
+                <!-- Prizes & Requirements -->
+                <div class="grid grid-2" style="margin-bottom: var(--spacing-xl);">
+                    <div class="card" style="padding: var(--spacing-xl);">
+                        <h3 style="margin-bottom: 1.5rem; color: var(--color-primary);">🏆 Призы победителям</h3>
+                        <ul id="contest-prizes" style="display: grid; gap: 12px;">
+                            <!-- Prizes will be loaded from JSON -->
+                        </ul>
                     </div>
-                    <div>
-                        <h3 style="margin-bottom: 1rem;">📋 Требования</h3>
-                        <ul id="contest-requirements" style="display: grid; gap: 10px;"></ul>
+                    
+                    <div class="card" style="padding: var(--spacing-xl);">
+                        <h3 style="margin-bottom: 1.5rem; color: var(--color-primary);">📋 Требования к работам</h3>
+                        <ul id="contest-requirements" style="display: grid; gap: 12px;">
+                            <!-- Requirements will be loaded from JSON -->
+                        </ul>
                     </div>
                 </div>
                 
-                <button class="btn btn-primary mt-lg" onclick="openFormModal('contest')">Подать заявку на конкурс</button>
+                <!-- How to Participate -->
+                <div class="card" style="padding: var(--spacing-xl); margin-bottom: var(--spacing-xl);">
+                    <h3 style="margin-bottom: 1.5rem; text-align: center;">Как принять участие?</h3>
+                    <div class="grid grid-3" style="text-align: center;">
+                        <div>
+                            <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">1️⃣</div>
+                            <h4 style="margin-bottom: 0.5rem;">Заполните заявку</h4>
+                            <p style="color: var(--color-text-light); font-size: 0.9rem;">Нажмите кнопку ниже и отправьте форму</p>
+                        </div>
+                        <div>
+                            <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">2️⃣</div>
+                            <h4 style="margin-bottom: 0.5rem;">Подготовьте работу</h4>
+                            <p style="color: var(--color-text-light); font-size: 0.9rem;">Создайте работу в любой технике</p>
+                        </div>
+                        <div>
+                            <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">3️⃣</div>
+                            <h4 style="margin-bottom: 0.5rem;">Принесите до срока</h4>
+                            <p style="color: var(--color-text-light); font-size: 0.9rem;">Доставьте работу в школу до дедлайна</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- CTA Button -->
+                <div class="text-center">
+                    <button class="btn btn-primary btn-lg" onclick="openFormModal('contest')" style="min-width: 300px;">
+                        📝 Подать заявку на конкурс
+                    </button>
+                    <p style="margin-top: 1rem; color: var(--color-text-light); font-size: 0.9rem;">
+                        Участие бесплатное. Приём работ до конца декабря.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Previous Winners Gallery -->
+        <section class="section" style="background: white;">
+            <div class="container">
+                <h2 class="text-center" style="margin-bottom: 2rem;">Победители прошлых лет</h2>
+                <div class="grid grid-3">
+                    <div class="card">
+                        <img src="assets/images/gallery/1.JPG" alt="Работа победителя конкурса 2023" loading="lazy" style="height: 200px; object-fit: cover;">
+                        <div class="card-body">
+                            <h4>Конкурс 2023</h4>
+                            <p style="color: var(--color-text-light); font-size: 0.9rem;">1 место — Анна К., 12 лет</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <img src="assets/images/gallery/2.JPG" alt="Работа победителя конкурса 2023" loading="lazy" style="height: 200px; object-fit: cover;">
+                        <div class="card-body">
+                            <h4>Конкурс 2023</h4>
+                            <p style="color: var(--color-text-light); font-size: 0.9rem;">2 место — Михаил Д., 10 лет</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <img src="assets/images/gallery/1.JPG" alt="Работа победителя конкурса 2023" loading="lazy" style="height: 200px; object-fit: cover;">
+                        <div class="card-body">
+                            <h4>Конкурс 2023</h4>
+                            <p style="color: var(--color-text-light); font-size: 0.9rem;">3 место — Елена С., 14 лет</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq-section">
+            <div class="container faq-container">
+                <h2 class="faq-title">Вопросы о конкурсе</h2>
+                <p class="faq-subtitle">Часто задаваемые вопросы об участии в конкурсе</p>
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+                            <span>Можно ли подать несколько работ?</span>
+                            <svg class="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Да, каждый участник может подать до 3 работ в разных номинациях. Каждая работа регистрируется отдельной заявкой.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+                            <span>Нужно ли оплачивать участие?</span>
+                            <svg class="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Участие в конкурсе полностью бесплатное. Организационный взнос не требуется.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+                            <span>Когда будут объявлены результаты?</span>
+                            <svg class="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Итоги конкурса будут подведены до 15 января. Победители получат уведомления по телефону и email.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+                            <span>Могут ли участвовать взрослые?</span>
+                            <svg class="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Конкурс предназначен для участников от 5 до 16 лет. Для взрослых мы проводим отдельные мероприятия и выставки.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
 
+    <!-- Footer -->
     <footer>
         <div class="container">
-            <p class="text-center" style="opacity: 0.6; font-size: 0.8rem;">© 2024 Земля Искусства</p>
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Земля Искусства</h4>
+                    <p style="opacity: 0.8; font-size: 0.9rem;">Первая ремесленная школа в Тюмени. Учим детей творить своими руками с любовью к материалу.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Навигация</h4>
+                    <ul class="footer-links">
+                        <li><a href="directions.html">Курсы</a></li>
+                        <li><a href="teachers.html">Команда</a></li>
+                        <li><a href="contest.html">Конкурс</a></li>
+                        <li><a href="documents.html">Документы</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Контакты</h4>
+                    <ul class="footer-links">
+                        <li>г. Тюмень, ул. Ленина, 45</li>
+                        <li><a href="tel:+73452000000">+7 (3452) 00-00-00</a></li>
+                        <li><a href="mailto:info@terraarte.ru">info@terraarte.ru</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                © 2026 Земля Искусства. Все права защищены.
+            </div>
         </div>
     </footer>
 
-    <div id="formModal" class="modal">
+    <!-- Form Modal -->
+    <div id="formModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
         <div class="modal-content">
             <div id="modalBody"></div>
         </div>
     </div>
 
+    <!-- Scripts -->
     <script src="js/content-loader.js"></script>
     <script src="js/main.js"></script>
+    <script>
+        // FAQ Toggle Function (inline for this page)
+        function toggleFaq(button) {
+            const answer = button.nextElementSibling;
+            const isActive = button.classList.contains('active');
+            const isExpanded = button.getAttribute('aria-expanded') === 'true';
+            
+            // Close all FAQ items
+            document.querySelectorAll('.faq-question').forEach(q => {
+                q.classList.remove('active');
+                q.nextElementSibling.classList.remove('show');
+                q.setAttribute('aria-expanded', 'false');
+            });
+            
+            // Open clicked item if it wasn't active
+            if (!isActive) {
+                button.classList.add('active');
+                answer.classList.add('show');
+                button.setAttribute('aria-expanded', 'true');
+            }
+        }
+    </script>
 </body>
 </html>
