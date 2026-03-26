@@ -135,7 +135,6 @@ async function openFormModal(formType, prefillDirection = '') {
             `;
         });
         
-        // 🔧 ДОБАВЛЕНО: Чекбокс согласия на обработку персональных данных
         const consentHtml = `
             <div class="form-group" style="margin-top: 1.5rem; padding: 1rem; background: var(--color-bg); border-radius: var(--radius-md); border-left: 3px solid var(--color-primary);">
                 <label style="display: flex; align-items: flex-start; gap: 0.75rem; cursor: pointer; font-size: 0.9rem; line-height: 1.4;">

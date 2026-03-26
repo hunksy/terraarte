@@ -20,7 +20,7 @@ const emailTransporter = nodemailer.createTransport({
         pass: process.env.EMAIL_PASS
     },
     tls: {
-        rejectUnauthorized: process.env.NODE_ENV === 'production'
+        rejectUnauthorized: false
     }
 });
 
@@ -185,6 +185,7 @@ app.post('/api/submit-form', async (req, res) => {
                 });
                 emailSent = true;
             } catch (error) {
+                console.error(error.message);
                 errors.push('Email');
             }
         }
