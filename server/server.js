@@ -1,9 +1,8 @@
 require('dotenv').config();
 const express = require('express');
 const path = require('path');
-const nodemailer = require('nodemailer');
-const dns = require('dns');
-dns.setDefaultResultOrder('ipv4first');
+const { Resend } = require('resend');
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -12,26 +11,26 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../public')));
 
-const emailTransporter = nodemailer.createTransport({
-    host: process.env.EMAIL_HOST || 'smtp.mail.ru',
-    port: parseInt(process.env.EMAIL_PORT) || 465,
-    secure: true,
-    auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS
-    },
-    lookup: (hostname, options, callback) => {
-        return dns.lookup(hostname, { family: 4 }, callback);
-    }
-});
+// const emailTransporter = nodemailer.createTransport({
+//     host: process.env.EMAIL_HOST || 'smtp.mail.ru',
+//     port: parseInt(process.env.EMAIL_PORT) || 465,
+//     secure: true,
+//     auth: {
+//         user: process.env.EMAIL_USER,
+//         pass: process.env.EMAIL_PASS
+//     },
+//     lookup: (hostname, options, callback) => {
+//         return dns.lookup(hostname, { family: 4 }, callback);
+//     }
+// });
 
-emailTransporter.verify((error, success) => {
-    if (error) {
-        console.error('Ошибка подключения к почте:', error.message);
-    } else {
-        console.log('Почта готова к отправке');
-    }
-});
+// emailTransporter.verify((error, success) => {
+//     if (error) {
+//         console.error('Ошибка подключения к почте:', error.message);
+//     } else {
+//         console.log('Почта готова к отправке');
+//     }
+// });
 
 app.get('/api/config', (req, res) => {
     res.sendFile(path.join(__dirname, '../data/config.json'));
@@ -154,36 +153,23 @@ app.post('/api/submit-form', async (req, res) => {
         const emailTo = process.env.EMAIL_TO || 'vfndtqxtvfuby@mail.ru';
         const emailFrom = process.env.EMAIL_FROM || emailUser;
 
-        if (emailUser && emailPass) {
+        if (process.env.RESEND_API_KEY) {
             try {
-                await emailTransporter.sendMail({
-                    from: `"Форма сайта" <${emailFrom}>`,
+                await resend.emails.send({
+                    from: 'onboarding@resend.dev', // можно оставить
                     to: emailTo,
                     subject: emailSubject,
-                    text: plainTextMessage,
                     html: `
-                        <!DOCTYPE html>
-                        <html>
-                        <head><meta charset="utf-8"><style>
-                            body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
-                            .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-                            .header { background: #4a90e2; color: white; padding: 15px; border-radius: 5px 5px 0 0; }
-                            .content { background: #f9f9f9; padding: 20px; border: 1px solid #eee; border-radius: 0 0 5px 5px; }
-                            .footer { text-align: center; color: #999; font-size: 12px; margin-top: 20px; }
-                            pre { white-space: pre-wrap; font-family: inherit; margin: 0; }
-                        </style></head>
-                        <body>
-                            <div class="container">
-                                <div class="header"><h2 style="margin:0;">${emailSubject}</h2></div>
-                                <div class="content"><pre>${plainTextMessage}</pre></div>
-                                <div class="footer">
-                                    Отправлено: ${new Date().toLocaleString('ru-RU')}<br>
-                                </div>
-                            </div>
-                        </body>
-                        </html>
+                        <div style="font-family: Arial; padding: 20px;">
+                            <h2>${emailSubject}</h2>
+                            <pre style="white-space: pre-wrap;">${plainTextMessage}</pre>
+                            <p style="color: #999; font-size: 12px;">
+                                Отправлено: ${new Date().toLocaleString('ru-RU')}
+                            </p>
+                        </div>
                     `
                 });
+        
                 emailSent = true;
             } catch (error) {
                 console.error(error.message);
