@@ -179,7 +179,7 @@ async function openFormModal(formType, prefillDirection = '') {
         modalBody.innerHTML = `
             <span class="close-modal" onclick="closeFormModal()">&times;</span>
             <div style="text-align: center; padding: 2rem;">
-                <p style="color: #dc3545; margin-bottom: 1rem;">❌ Не удалось загрузить форму</p>
+                <p style="color: #dc3545; margin-bottom: 1rem;">Не удалось загрузить форму</p>
                 <button class="btn btn-outline" onclick="openFormModal('${formType}', '${prefillDirection}')">
                     Попробовать снова
                 </button>
@@ -219,7 +219,6 @@ function closeFormModal() {
     document.body.style.overflow = '';
 }
 
-// === Отправка формы ===
 async function handleFormSubmit(event, formType) {
     event.preventDefault();
     
@@ -227,25 +226,20 @@ async function handleFormSubmit(event, formType) {
     const submitBtn = form.querySelector('button[type="submit"]');
     const originalText = submitBtn.textContent;
     
-    // Валидация формы
     if (!form.checkValidity()) {
         form.reportValidity();
         return;
     }
     
-    // Проверка чекбокса согласия
     const consentCheckbox = form.querySelector('input[name="consent"]');
     if (consentCheckbox && !consentCheckbox.checked) {
-        alert('❌ Для отправки заявки необходимо дать согласие на обработку персональных данных');
         consentCheckbox.focus();
         return;
     }
     
-    // Collect form data
     const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
     
-    // Нормализация телефона
     if (data.phone) {
         const cleanPhone = data.phone.replace(/\D/g, '');
         let normalizedPhone = cleanPhone;
@@ -255,7 +249,7 @@ async function handleFormSubmit(event, formType) {
         } else if (cleanPhone.length === 10) {
             normalizedPhone = '7' + cleanPhone;
         } else if (cleanPhone.length < 10) {
-            alert('❌ Пожалуйста, введите корректный номер телефона (минимум 10 цифр)');
+            alert('Пожалуйста, введите корректный номер телефона (минимум 10 цифр)');
             submitBtn.textContent = originalText;
             submitBtn.disabled = false;
             return;
@@ -264,12 +258,10 @@ async function handleFormSubmit(event, formType) {
         data.phone = '+' + normalizedPhone;
     }
     
-    // Добавляем флаг согласия в данные
     data.consentGiven = consentCheckbox?.checked || false;
     data.consentDate = new Date().toISOString();
     
-    // Disable button and show loading state
-    submitBtn.textContent = '⏳ Отправка...';
+    submitBtn.textContent = 'Отправка...';
     submitBtn.disabled = true;
     
     try {
@@ -287,11 +279,9 @@ async function handleFormSubmit(event, formType) {
         const result = await response.json();
         
         if (result.success) {
-            // Показываем успешное сообщение
             const modalBody = document.getElementById('modalBody');
             modalBody.innerHTML = `
                 <div style="text-align: center; padding: 2rem;">
-                    <div style="font-size: 4rem; margin-bottom: 1rem;">✅</div>
                     <h3 style="margin-bottom: 1rem; color: var(--color-primary);">${result.message}</h3>
                     <p style="color: var(--color-text-light); margin-bottom: 1.5rem;">
                         Мы свяжемся с вами в ближайшее время.
@@ -302,19 +292,18 @@ async function handleFormSubmit(event, formType) {
                 </div>
             `;
         } else {
-            alert('❌ ' + result.message);
+            alert(result.message);
             submitBtn.textContent = originalText;
             submitBtn.disabled = false;
         }
     } catch (error) {
         console.error('Form submission error:', error);
-        alert('❌ Произошла ошибка при отправке. Попробуйте позже или позвоните нам.');
+        alert('Произошла ошибка при отправке. Попробуйте позже или позвоните нам.');
         submitBtn.textContent = originalText;
         submitBtn.disabled = false;
     }
 }
 
-// === Закрытие модального окна при клике вне ===
 window.onclick = function(event) {
     const modal = document.getElementById('formModal');
     if (event.target === modal) {
@@ -322,14 +311,12 @@ window.onclick = function(event) {
     }
 }
 
-// === Закрытие модального окна по Escape ===
 document.addEventListener('keydown', function(event) {
     if (event.key === 'Escape') {
         closeFormModal();
     }
 });
 
-// === Анимация спиннера ===
 const spinStyle = document.createElement('style');
 spinStyle.textContent = `
     @keyframes spin {
@@ -339,19 +326,16 @@ spinStyle.textContent = `
 `;
 document.head.appendChild(spinStyle);
 
-// === FAQ Toggle Function (ГЛОБАЛЬНАЯ - для всех страниц) ===
 window.toggleFaq = function(button) {
     const answer = button.nextElementSibling;
     const isActive = button.classList.contains('active');
     
-    // Закрыть все элементы FAQ
     document.querySelectorAll('.faq-question').forEach(q => {
         q.classList.remove('active');
         q.nextElementSibling.classList.remove('show');
         q.setAttribute('aria-expanded', 'false');
     });
     
-    // Открыть выбранный элемент
     if (!isActive) {
         button.classList.add('active');
         answer.classList.add('show');
@@ -359,7 +343,6 @@ window.toggleFaq = function(button) {
     }
 }
 
-// === Переворот карточки преподавателя ===
 window.flipTeacherCard = function(element) {
     const card = element.closest('.teacher-card');
     if (card) {
@@ -367,7 +350,6 @@ window.flipTeacherCard = function(element) {
     }
 }
 
-// Закрытие перевёрнутых карточек при клике вне
 document.addEventListener('click', function(e) {
     const teacherCard = e.target.closest('.teacher-card');
     if (!teacherCard) {
@@ -377,7 +359,6 @@ document.addEventListener('click', function(e) {
     }
 });
 
-// === Экспорт функций для глобального доступа ===
 window.toggleMobileMenu = toggleMobileMenu;
 window.openFormModal = openFormModal;
 window.closeFormModal = closeFormModal;
