@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../public')));
 
 const emailTransporter = nodemailer.createTransport({
-    host: '94.100.180.31',
+    host: process.env.EMAIL_HOST || 'smtp.mail.ru',
     port: parseInt(process.env.EMAIL_PORT) || 465,
     secure: true,
     family: 4,
