@@ -304,7 +304,7 @@ const ContentLoader = {
                                 <p class="card-text">${teacher.description}</p>
                             </div>
                             <div class="teacher-card-actions">
-                                <button class="btn btn-outline teacher-card-btn" onclick="event.stopPropagation(); flipTeacherCard(this)">
+                                <button class="btn btn-primary teacher-card-btn" onclick="event.stopPropagation(); flipTeacherCard(this)">
                                     Подробнее
                                 </button>
                                 <div class="teacher-card-hint">
