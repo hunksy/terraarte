@@ -7,16 +7,13 @@
     <title>Главная - Земля Искусства</title>
     <link rel="icon" href="assets/images/logo/mini-logo.png" width="64" height="40" type="image/png">
     
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
     
-    <!-- Styles -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body data-page="home">
-    <!-- Header -->
     <header id="mainHeader">
         <div class="container nav-container">
             <a href="index.html" class="logo">
@@ -46,7 +43,6 @@
     </header>
 
     <main>
-        <!-- Hero Section -->
         <section class="hero" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('assets/images/gallery/1.JPG');">
             <div class="container">
                 <div class="hero-content">
@@ -60,7 +56,6 @@
             </div>
         </section>
 
-        <!-- About Preview -->
         <section class="section container">
             <div class="grid grid-2">
                 <div>
@@ -75,7 +70,6 @@
             </div>
         </section>
 
-        <!-- Directions Preview -->
         <section class="section" style="background: white;">
             <div class="container">
                 <h2 class="text-center" style="margin-bottom: 2rem;">Направления обучения</h2>
@@ -86,7 +80,6 @@
             </div>
         </section>
 
-        <!-- Teachers Preview -->
         <section class="section container">
             <h2 class="text-center" style="margin-bottom: 2rem;">Наши преподаватели</h2>
             <div class="grid grid-3" id="teachers-preview-grid"></div>
@@ -95,13 +88,11 @@
             </div>
         </section>
 
-        <!-- FAQ Section -->
         <section class="faq-section">
             <div class="container faq-container">
                 <h2 class="faq-title">Часто задаваемые вопросы</h2>
                 <p class="faq-subtitle">Найдёте ответы на самые популярные вопросы о нашей школе</p>
                 <div class="faq-list" id="faqList">
-                    <!-- FAQ items will be loaded from JSON -->
                 </div>
             </div>
         </section>
@@ -133,14 +124,12 @@
         </div>
     </footer>
 
-    <!-- Form Modal -->
     <div id="formModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
         <div class="modal-content">
             <div id="modalBody"></div>
         </div>
     </div>
 
-    <!-- Scripts -->
     <script src="js/content-loader.js"></script>
     <script src="js/faq-loader.js"></script>
     <script src="js/main.js"></script>

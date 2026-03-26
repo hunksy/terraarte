@@ -1,26 +1,74 @@
 [
   {
-    "id": "mc-1",
-    "title": "Лепим первую чашку",
-    "date": "Каждую субботу",
-    "duration": "2 часа",
-    "price": "1500 ₽",
-    "description": "Однодневный мастер-класс для начинающих. Создадите свою первую керамическую чашку."
+    "title": "Мастер-класс по гончарному ремеслу",
+    "group": "до 3 чел.",
+    "age": "10+",
+    "duration": "1,5 часа",
+    "price": "от 2500 ₽",
+    "image": "assets/images/masterclasses/1.jpg"
   },
   {
-    "id": "mc-2",
-    "title": "Рисуем натюрморт",
-    "date": "Каждое воскресенье",
-    "duration": "3 часа",
-    "price": "1800 ₽",
-    "description": "Мастер-класс по живописи. Научимся правильно строить композицию и работать с цветом."
+    "title": "Мастер-класс по ручной лепке",
+    "group": "до 8 чел.",
+    "age": "6+",
+    "duration": "1,5 часа",
+    "price": "от 2500 ₽",
+    "image": "assets/images/masterclasses/2.jpg"
   },
   {
-    "id": "mc-3",
-    "title": "Новогодние игрушки",
-    "date": "Декабрь",
+    "title": "Мастер-класс горшочек-«Шептун»",
+    "group": "8-10 чел.",
+    "age": "7+",
+    "duration": "1 час",
+    "price": "от 600 ₽",
+    "image": "assets/images/masterclasses/3.jpg"
+  },
+  {
+    "title": "Корпоративный мастер-класс",
+    "group": "до 40 чел.",
+    "age": "18+",
+    "duration": "1 час",
+    "price": "от 600 ₽",
+    "image": "assets/images/masterclasses/4.jpg"
+  },
+  {
+    "title": "Выездные мастер-классы для детей",
+    "group": "от 20 чел.",
+    "age": "7+",
+    "duration": "1-1,5 часа",
+    "price": "от 500 ₽",
+    "image": "assets/images/masterclasses/5.jpg"
+  },
+  {
+    "title": "Семейный мастер-класс",
+    "group": "от 3 чел.",
+    "age": "3+",
     "duration": "2 часа",
-    "price": "1200 ₽",
-    "description": "Праздничный мастер-класс. Создадим уникальные ёлочные украшения своими руками."
+    "price": "от 500 ₽",
+    "image": "assets/images/masterclasses/6.jpg"
+  },
+  {
+    "title": "Текстиль - Лоскутная игрушка",
+    "group": "от 10 чел.",
+    "age": "7+",
+    "duration": "40-45 мин.",
+    "price": "от 400 ₽",
+    "image": "assets/images/masterclasses/7.jpg"
+  },
+  {
+    "title": "Экскурсии",
+    "group": "от 3 чел.",
+    "age": "7+",
+    "duration": "1 час.",
+    "price": "от 400 ₽",
+    "image": "assets/images/masterclasses/8.jpg"
+  },
+  {
+    "title": "Тюменский махровый ковёр",
+    "group": "от 10 чел.",
+    "age": "7+",
+    "duration": "1 час.",
+    "price": "от 1000 ₽",
+    "image": "assets/images/masterclasses/9.jpg"
   }
 ]

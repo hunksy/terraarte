@@ -7,16 +7,13 @@
     <title>О школе - Земля Искусства</title>
     <link rel="icon" href="assets/images/logo/mini-logo.png" width="64" height="40" type="image/png">
     
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
     
-    <!-- Styles -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body data-page="about">
-    <!-- Header -->
     <header id="mainHeader">
         <div class="container nav-container">
             <a href="index.html" class="logo">
@@ -46,7 +43,6 @@
     </header>
 
     <main>
-        <!-- Page Header -->
         <section class="section" style="background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%); color: white; padding: var(--spacing-xxl) 0;">
             <div class="container text-center">
                 <h1 id="about-title" style="color: white; margin-bottom: 1rem;">Загрузка...</h1>
@@ -54,7 +50,6 @@
             </div>
         </section>
 
-        <!-- About Content -->
         <section class="section container">
             <div class="grid grid-2">
                 <div style="font-size: 1.1rem; line-height: 1.8;">
@@ -63,17 +58,13 @@
                     
                     <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Наши преимущества</h3>
                     <ul id="about-benefits-full" style="display: grid; gap: 10px; margin-bottom: 2rem;">
-                        <!-- Benefits will be loaded from JSON -->
                     </ul>
-                    
-                    <!-- <div style="background: var(--color-bg); padding: var(--spacing-lg); border-radius: var(--radius-lg); margin-top: 2rem;"> -->
-                        <h4 style="margin-bottom: 1rem;">Лицензия и документы</h4>
-                        <p style="margin-bottom: 1rem; font-size: 0.95rem; color: var(--color-text-light);">
-                            Школа работает официально на основании лицензии на образовательную деятельность.
-                            Все документы доступны для ознакомления.
-                        </p>
-                        <a href="documents.html" class="btn btn-outline">Посмотреть документы</a>
-                    <!-- </div> -->
+                    <h4 style="margin-bottom: 1rem;">Лицензия и документы</h4>
+                    <p style="margin-bottom: 1rem; font-size: 0.95rem; color: var(--color-text-light);">
+                        Школа работает официально на основании лицензии на образовательную деятельность.
+                        Все документы доступны для ознакомления.
+                    </p>
+                    <a href="documents.html" class="btn btn-outline">Посмотреть документы</a>
                 </div>
                 <div>
                     <img 
@@ -86,7 +77,6 @@
             </div>
         </section>
 
-        <!-- Stats Section -->
         <section class="section" style="background: white;">
             <div class="container">
                 <div class="grid grid-4 text-center">
@@ -99,18 +89,17 @@
                         <div style="color: var(--color-text-light);">учеников</div>
                     </div>
                     <div>
-                        <div style="font-size: 3rem; font-weight: 700; color: var(--color-primary);">8</div>
-                        <div style="color: var(--color-text-light);">человек в группе</div>
+                        <div style="font-size: 3rem; font-weight: 700; color: var(--color-primary);">3</div>
+                        <div style="color: var(--color-text-light);">направления</div>
                     </div>
                     <div>
                         <div style="font-size: 3rem; font-weight: 700; color: var(--color-primary);">4</div>
-                        <div style="color: var(--color-text-light);">направления</div>
+                        <div style="color: var(--color-text-light);">курса</div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- CTA Section -->
         <section class="section container text-center">
             <h2 style="margin-bottom: 1rem;">Готовы начать творческий путь?</h2>
             <p style="margin-bottom: 2rem; color: var(--color-text-light); max-width: 600px; margin-left: auto; margin-right: auto;">
@@ -148,14 +137,12 @@
         </div>
     </footer>
 
-    <!-- Form Modal -->
     <div id="formModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
         <div class="modal-content">
             <div id="modalBody"></div>
         </div>
     </div>
 
-    <!-- Scripts -->
     <script src="js/content-loader.js"></script>
     <script src="js/main.js"></script>
 </body>

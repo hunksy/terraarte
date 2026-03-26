@@ -8,7 +8,6 @@ function toggleMobileMenu() {
     const navLinks = document.getElementById('navLinks');
     navLinks.classList.toggle('active');
     
-    // Блокируем прокрутку body при открытом меню
     if (navLinks.classList.contains('active')) {
         document.body.style.overflow = 'hidden';
     } else {
@@ -43,13 +42,17 @@ async function openFormModal(formType, prefillDirection = '') {
     
     try {
         // Загружаем данные форм и направлений
-        const [formsRes, directionsRes] = await Promise.all([
+        const [formsRes, directionsRes, coursesRes, masterclassesRes] = await Promise.all([
             fetch('/api/forms'),
-            fetch('/api/directions')
+            fetch('/api/directions'),
+            fetch('/api/courses'),
+            fetch('/api/masterclasses')
         ]);
         
         const forms = await formsRes.json();
         const directions = await directionsRes.json();
+        const courses = await coursesRes.json();
+        const masterclasses = await masterclassesRes.json();
         
         const formData = forms[formType];
         
@@ -66,11 +69,27 @@ async function openFormModal(formType, prefillDirection = '') {
                 inputHtml = `
                     <select name="${field.name}" class="form-control" ${field.required ? 'required' : ''}>
                         <option value="">Выберите направление</option>
-                        ${directions.map(d => `
-                            <option value="${d.title}" ${d.title === prefillDirection ? 'selected' : ''}>
-                                ${d.title}
-                            </option>
-                        `).join('')}
+                        <optgroup label="Направления">
+                            ${directions.map(d => `
+                                <option value="${d.title}" ${d.title === prefillDirection ? 'selected' : ''}>
+                                    ${d.title}
+                                </option>
+                            `).join('')}
+                        </optgroup>
+                        <optgroup label="Курсы">
+                            ${courses.map(c => `
+                                <option value="${c.title}" ${c.title === prefillDirection ? 'selected' : ''}>
+                                    ${c.title}
+                                </option>
+                            `).join('')}
+                        </optgroup>
+                        <optgroup label="Мастер-классы">
+                            ${masterclasses.map(mc => `
+                                <option value="${mc.title}" ${mc.title === prefillDirection ? 'selected' : ''}>
+                                    ${mc.title}
+                                </option>
+                            `).join('')}
+                        </optgroup>
                     </select>
                 `;
             } else if (field.type === 'textarea') {
@@ -116,16 +135,33 @@ async function openFormModal(formType, prefillDirection = '') {
             `;
         });
         
+        // 🔧 ДОБАВЛЕНО: Чекбокс согласия на обработку персональных данных
+        const consentHtml = `
+            <div class="form-group" style="margin-top: 1.5rem; padding: 1rem; background: var(--color-bg); border-radius: var(--radius-md); border-left: 3px solid var(--color-primary);">
+                <label style="display: flex; align-items: flex-start; gap: 0.75rem; cursor: pointer; font-size: 0.9rem; line-height: 1.4;">
+                    <input type="checkbox" name="consent" required style="width: 18px; height: 18px; margin-top: 2px; flex-shrink: 0; accent-color: var(--color-primary);">
+                    <span>
+                        Я даю согласие на обработку персональных данных в соответствии с 
+                        <a href="/consent.html" target="_blank" style="color: var(--color-primary); text-decoration: underline; font-weight: 600;">
+                            Согласием на обработку персональных данных
+                        </a>
+                        <span style="color: var(--color-primary); font-weight: 600;">*</span>
+                    </span>
+                </label>
+            </div>
+        `;
+        
         modalBody.innerHTML = `
             <span class="close-modal" onclick="closeFormModal()" aria-label="Закрыть">&times;</span>
             <h2 style="margin-bottom: 1.5rem;">${formData.title}</h2>
             <form onsubmit="handleFormSubmit(event, '${formType}')" novalidate>
                 ${fieldsHtml}
-                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                ${consentHtml}
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">
                     Отправить заявку
                 </button>
-                <p class="form-note">
-                    Нажимая кнопку, вы соглашаетесь с <a href="documents.html" target="_blank" style="text-decoration: underline;">обработкой персональных данных</a>.
+                <p class="form-note" style="margin-top: 1rem; font-size: 0.8rem;">
+                    Поля, отмеченные <span style="color: var(--color-primary);">*</span>, обязательны для заполнения
                 </p>
             </form>
         `;
@@ -155,20 +191,17 @@ async function openFormModal(formType, prefillDirection = '') {
 // === Форматирование телефона ===
 function formatPhoneNumber(e) {
     let input = e.target;
-    let value = input.value.replace(/\D/g, ''); // Убираем всё кроме цифр
+    let value = input.value.replace(/\D/g, '');
     
     if (value.length > 0) {
-        // Убираем 7 или 8 в начале
         if (value[0] === '7' || value[0] === '8') {
             value = value.substring(1);
         }
         
-        // Ограничиваем длину (10 цифр после +7)
         if (value.length > 10) {
             value = value.substring(0, 10);
         }
         
-        // Форматируем
         let formattedValue = '+7';
         if (value.length > 0) formattedValue += ' (' + value.substring(0, 3);
         if (value.length >= 3) formattedValue += ') ' + value.substring(3, 6);
@@ -200,6 +233,14 @@ async function handleFormSubmit(event, formType) {
         return;
     }
     
+    // Проверка чекбокса согласия
+    const consentCheckbox = form.querySelector('input[name="consent"]');
+    if (consentCheckbox && !consentCheckbox.checked) {
+        alert('❌ Для отправки заявки необходимо дать согласие на обработку персональных данных');
+        consentCheckbox.focus();
+        return;
+    }
+    
     // Collect form data
     const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
@@ -222,6 +263,10 @@ async function handleFormSubmit(event, formType) {
         
         data.phone = '+' + normalizedPhone;
     }
+    
+    // Добавляем флаг согласия в данные
+    data.consentGiven = consentCheckbox?.checked || false;
+    data.consentDate = new Date().toISOString();
     
     // Disable button and show loading state
     submitBtn.textContent = '⏳ Отправка...';
@@ -246,6 +291,7 @@ async function handleFormSubmit(event, formType) {
             const modalBody = document.getElementById('modalBody');
             modalBody.innerHTML = `
                 <div style="text-align: center; padding: 2rem;">
+                    <div style="font-size: 4rem; margin-bottom: 1rem;">✅</div>
                     <h3 style="margin-bottom: 1rem; color: var(--color-primary);">${result.message}</h3>
                     <p style="color: var(--color-text-light); margin-bottom: 1.5rem;">
                         Мы свяжемся с вами в ближайшее время.
@@ -262,7 +308,7 @@ async function handleFormSubmit(event, formType) {
         }
     } catch (error) {
         console.error('Form submission error:', error);
-        alert('Произошла ошибка при отправке. Попробуйте позже или позвоните нам.');
+        alert('❌ Произошла ошибка при отправке. Попробуйте позже или позвоните нам.');
         submitBtn.textContent = originalText;
         submitBtn.disabled = false;
     }
@@ -313,8 +359,27 @@ window.toggleFaq = function(button) {
     }
 }
 
+// === Переворот карточки преподавателя ===
+window.flipTeacherCard = function(element) {
+    const card = element.closest('.teacher-card');
+    if (card) {
+        card.classList.toggle('flipped');
+    }
+}
+
+// Закрытие перевёрнутых карточек при клике вне
+document.addEventListener('click', function(e) {
+    const teacherCard = e.target.closest('.teacher-card');
+    if (!teacherCard) {
+        document.querySelectorAll('.teacher-card.flipped').forEach(card => {
+            card.classList.remove('flipped');
+        });
+    }
+});
+
 // === Экспорт функций для глобального доступа ===
 window.toggleMobileMenu = toggleMobileMenu;
 window.openFormModal = openFormModal;
 window.closeFormModal = closeFormModal;
 window.handleFormSubmit = handleFormSubmit;
+window.formatPhoneNumber = formatPhoneNumber;

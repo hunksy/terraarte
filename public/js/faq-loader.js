@@ -1,7 +1,3 @@
-/**
- * FAQ Loader - загружает вопросы и ответы из JSON и рендерит их на странице
- */
-
 document.addEventListener('DOMContentLoaded', () => {
     loadFAQ();
 });
@@ -11,7 +7,6 @@ async function loadFAQ() {
     if (!faqList) return;
 
     try {
-        // Используем API-эндпоинт
         const response = await fetch('/api/faq');
         if (!response.ok) throw new Error('Не удалось загрузить FAQ');
         
@@ -24,7 +19,6 @@ async function loadFAQ() {
 }
 
 function renderFAQ(faqItems, container) {
-    // Проверяем структуру данных
     const items = Array.isArray(faqItems) ? faqItems : (faqItems.faq || []);
     
     if (items.length === 0) {
@@ -47,7 +41,6 @@ function renderFAQ(faqItems, container) {
     `).join('');
 }
 
-// Защита от XSS
 function escapeHtml(text) {
     if (!text) return '';
     const map = {
