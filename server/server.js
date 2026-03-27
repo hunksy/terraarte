@@ -161,7 +161,6 @@ app.post('/api/submit-form', async (req, res) => {
                     subject: emailSubject,
                     html: `
                         <div style="font-family: Arial; padding: 20px;">
-                            <h2>${emailSubject}</h2>
                             <pre style="white-space: pre-wrap;">${plainTextMessage}</pre>
                             <p style="color: #999; font-size: 12px;">
                                 Отправлено: ${new Date().toLocaleString('ru-RU')}
